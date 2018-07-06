@@ -13,7 +13,7 @@
       <i class="iconfont icon-bofang" v-if="!ifplay" v-show="realshow" @click="playmusic(isshoworhide)"></i>
     </div>
 </div>
-
+  
   <audio v-if = "playwhat" :src="playwhat" autoplay loop></audio>
   <div class="inside">排行榜 共{{list.length}}首</div>
   <ul v-if = "list" @click="ifplay=false">
