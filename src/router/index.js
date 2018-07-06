@@ -9,6 +9,8 @@ import searchID from '@/components/searchID'
 import login from '@/components/login'
 import register from '@/components/register'
 import Hotsong from "../components/hotsong"
+import Album from "../components/album"
+
 Vue.use(Router)
 
 export default new Router({
@@ -53,6 +55,10 @@ export default new Router({
     {
       path:'/hotsong',
       component:Hotsong
+    },
+    {
+      path:'/album',
+      component:Album
     },
 
   ]

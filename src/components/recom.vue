@@ -1,11 +1,13 @@
 <template>
 	<div>
 		<navbar></navbar>
+		<a href="./album">
 		<swipe class="my-swipe" :auto="3000">
 		  <swipe-item class="slide1" v-for="data in swiperSlides" :key="data.id">
 		  	<img :src="data.picUrl"/>
 		  </swipe-item>  
 		</swipe>
+		</a>
 
 		<div class="radio_list">
 			<h3 class="list_title">电台</h3>

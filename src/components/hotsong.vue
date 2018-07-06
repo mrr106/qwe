@@ -1,6 +1,6 @@
 <template>
 	<article class="wrap">
-		<section class="topbar" v-show="topbar">
+		<section class="topbar" :v-show="topbar">
 			<div class="topbar_bd">
 				<img src="//y.gtimg.cn/mediastyle/mod/mobile/img/logo_ch.svg?max_age=604800" class="logo">
 				<a href="javascript:;">下载APP</a>
@@ -16,6 +16,7 @@
 				</div>
 				<a href="javascript:;" class="event_operation__btn js_btn js_tj js_link" data-id="https://y.qq.com/apg/277/index.html?mbref=312.30241ADTAG=wechatqp&openinqqmusic=1&channelID=10031777" data-tj="plugin_click_$qm.14" data-target="music" data-cid="10031512">点击参与</a>
 			</div>
+			
 		</section> 
 		<section class="main">
 			<div class="main__bd">
@@ -23,9 +24,9 @@
 					<!-- 歌曲的header -->
 					<div class="song_info__hd">
 						<h1 class="song_name">
-							<span class="song_name__text js_song_name">这就是爱情</span>
+							<span class="song_name__text js_song_name">{{songname}}({{transname}})</span>
 						</h1>
-						<h2 class="singer_name js_singer_name js_singer">李代沫</h2>		
+						<h2 class="singer_name js_singer_name js_singer">{{singer}}</h2>		
 					</div>
 					<!-- 歌词大部分 -->
 					<div class="song_info__bd js_toggle_cover js_tj">
@@ -46,16 +47,29 @@
 	</article>
 </template>
 <script type="text/javascript">
+import axios from "axios"
 	export default{
 		data(){
 			return{
-			topbar:true				
+			topbar:true	,
+			transname:'',
+			songname:'',
+			singer:''
 			}
 		},
 		mounted(){
 			setTimeout(function(){
 				this.topbar=false;
 			},3000)
+			//https://u.y.qq.com
+			// https://u.y.qq.com/cgi-bin/musicu.fcg?_=1530693005106
+			 axios.post(`cgi-bin/musicu.fcg?_=1530693005106`,`{"comm":{"g_tk":1375173830,"uin":491609915,"format":"json","inCharset":"utf-8","outCharset":"utf-8","notice":0,"platform":"h5","needNewCode":1},"detail":{"module":"music.pf_song_detail_svr","method":"get_song_detail","param":{"song_id":7085562}},"simsongs":{"module":"rcmusic.similarSongRadioServer","method":"get_simsongs","param":{"songid":7085562}},"gedan":{"module":"music.mb_gedan_recommend_svr","method":"get_related_gedan","param":{"sin":0,"last_id":0,"song_type":1,"song_id":7085562}}}
+			`).then(res=>{
+			        console.log(res.data.detail.data.info[0].content[0].value)
+			     	this.transname=res.data.detail.data.extras.transname
+			     	this.songname=res.data.detail.data.extras.name
+			     	this.singer = res.data.detail.data.info[0].content[0].value
+			      })
 		}
 	}
 </script>
@@ -135,5 +149,38 @@ article{
 	
 		}
 	}
-
+	.main{
+		.main__bd{
+			.song_info{
+				.song_info__hd{
+					color:#ccc;
+					font-size: 12px;
+					.song_name__text{
+						text-align: center;
+						display: block;
+						// max-width:32px;
+						// overflow: hidden;
+						// white-space: nowrap;
+						// text-overflow: ellipsis;
+						font-size: 19px;
+						font-weight: 400;
+						color: #000;
+					}
+					.singer_name{
+						margin: 20px 15px;
+						    text-align: center;
+						    overflow: hidden;
+						    white-space: nowrap;
+						    text-overflow: ellipsis;
+						    font-size: 14px;
+						    font-weight: 100;
+						    color: grey;
+					}
+				}
+				.song_info__bd{
+					background:#f60;
+				}
+			}
+		}
+	}
 </style>

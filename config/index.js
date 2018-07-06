@@ -19,7 +19,8 @@ module.exports = {
           //     '^/v4/api': '/v4/api'
           //   }
       },
-      '/cgi-bin': {
+      
+      '/cgi-bin':{
           target: 'https://u.y.qq.com',
           host: 'u.y.qq.com',
           changeOrigin:true,
