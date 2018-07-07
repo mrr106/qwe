@@ -51,6 +51,17 @@ export default {
 
   },
   methods:{
+    scr(el){
+      var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
+      var content = document.querySelector('.content')
+      console.log(scrollTop)
+      if(scrollTop>=160){
+        content.style.position = 'fixed'
+        content.style.top = '0'
+      }else{
+        content.style.position = ''
+      }
+    },
     autoplay(res){
       if(this.musicurl.length!==0){
       this.playwhat=this.musicurl[res].purl
@@ -89,7 +100,7 @@ export default {
   },
   mounted(){
       var id = this.$route.params.id
-
+      window.addEventListener('scroll', this.scr)
       axios.get(`/v8/fcg-bin/fcg_v8_toplist_cp.fcg?g_tk=5381&uin=0&format=json&inCharset=utf-8&outCharset=utf-8&notice=0&platform=h5&needNewCode=1&tpl=3&page=detail&type=top&topid=${id}&_=1530622626344`).then(res=>{
         // console.log(res.data.songlist)
         this.list=res.data.songlist;
@@ -136,7 +147,7 @@ img{
   margin-left: 3%;
 }
 .top{
-  padding-bottom: 6%;  
+ 
   overflow: hidden;
   background: rgba(0,0,0,.5);
 }
@@ -150,7 +161,7 @@ img{
   left: 3%;
   margin-top: 5%;
 }
-ul{list-style: none;
+ul{list-style: none;position: absolute;top: 45%;-webkit-font-smoothing:antialiased;text-shadow: 0;color: black;
   .index{float: left;color:red;margin-left: 4%;margin-top: 2%}
   h3{margin-left: 14%;margin-top: 5%;}
   p{margin-left: 14%;margin-top: 1%;}
@@ -158,31 +169,31 @@ ul{list-style: none;
 .inside{
   margin-left: 5%;
   margin-top: 5%;
+
 }
 .mint-button{
-display: -webkit-box;
     -webkit-box-pack: center;
     -webkit-box-align: center;
-    width: 170px;
-    height: 40px;
+    width: 200px;
+    height: 55px;
     overflow: hidden;
     text-align: center;
     font-size: 16px;
     color: #fff;
-    border-radius: 20px;
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
-    border-bottom-right-radius: 20px;
-    border-bottom-left-radius: 20px;
+    border-radius: 25px;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
+    border-bottom-left-radius: 25px;
     background: #31c27c;
-    margin-top: 6.6%;
+
    
 }
 .changecolor:hover{
   color: #31c27c;
 }
 .iconfont{
-font-size: 60px;
+font-size: 55px;
     position: relative;
     top: 3px;
     left: -250%;
@@ -192,12 +203,13 @@ font-size: 60px;
     -webkit-box-pack: center;
     -webkit-box-align: center;
     width: 100%;
-    height: 100%;
     overflow: hidden;
     text-align: center;
-    margin-top: 15%;
     margin-left: 0%;
-    margin-bottom: 1%
+    margin-bottom: 1%;
+    background-color: gray;
+    padding-bottom: 5%;
+    padding-top: 5%;
 }
 
 </style>

@@ -1,14 +1,14 @@
 <template>
 	<div>
 		<navbar></navbar>
-		<a href="./album">
+		<!-- <a href="./album"> -->
 		<swipe class="my-swipe" :auto="3000">
 		  <swipe-item class="slide1" v-for="data in swiperSlides" :key="data.id">
-		  	<img :src="data.picUrl"/>
+		  	<img :src="data.picUrl" @click="handleClick(data.linkUrl)"/>
 		  </swipe-item>  
 		</swipe>
-		</a>
-
+		<!-- </a> -->
+		<!-- {{data.linkUrl}} -->
 		<div class="radio_list">
 			<h3 class="list_title">电台</h3>
 			<ul class="radio_wrapper">
@@ -44,7 +44,7 @@
 	import { Swipe, SwipeItem } from 'vue-swipe';
 	import axios from "axios"
 	import navbar from "./navbar"
-
+	import router from "../router"
 	export default {
 	  components: {
 	    "swipe":Swipe,
@@ -58,17 +58,65 @@
 	          radioList:[]
 	        }
 	      },
+	      methods:{
+		      	handleClick(id){
+				// // console.log(id);
+				console.log(id)
+				var str = id ;
+			if(str=='https://y.qq.com/msa/zhubozhaomu/2_5638.html'){
+				router.push('/zhaomu')
+			}else{
+
+				var banner = str.split("?")[1];
+				var banner2 = banner.split("=")[0];
+				var albumid = banner.split("=")[1];
+				console.log(banner2)
+				
+				// // var s = 'https://y.qq.com/msa/zhubozhaomu/2_5638.html';
+				// var s=str.split("/")
+				// // var ss=s.split("/")
+				// // console.log(ss)
+				// // console.log(ss[4])
+				// console.log(s)
+				// // var zhaomu = str.split("/")[1];
+				// // https://y.qq.com/m/act/piaowu/81.html?_hidehd=1
+				
+					if(banner==='ADTAG=banner&openinqqmusic=1'){
+						// router.push('/m/act/sfhd/148.html?ADTAG=myqq&from=myqq&channel=10007100')
+					}
+					else if(banner2==='albummid'){
+							router.push(`/album/${albumid}`)
+					}else if(banner2==='_hidehd'){
+						// router.push('/xuezhiqian')
+					}
+					// else if(banner2==='w/album'){
+					// 	var albumid=banner.split("=")[1];
+					// 	router.push(`/album/${albumid}`)
+					// }
+					// else{
+					// 	router.push('/recom')
+					}
+			
+			}
+	      },
 	 mounted(){
-	        
+
+	       
 	        // https://c.y.qq.com/musichall/fcgi-bin/fcg_yqqhomepagerecommend.fcg?g_tk=5381&uin=0&format=json&inCharset=utf-8&outCharset=utf-8&notice=0&platform=h5&needNewCode=1&_=1530599358753
 	        axios.get('/musichall/fcgi-bin/fcg_yqqhomepagerecommend.fcg?g_tk=5381&uin=0&format=json&inCharset=utf-8&outCharset=utf-8&notice=0&platform=h5&needNewCode=1&_=1530599358753').then(res=>{
 	        	console.log(res.data.data.radioList)
+	        	// console.log(res.data.data.slider[0].linkUrl)
 	        	this.swiperSlides = res.data.data.slider;
 	        	this.radioList = res.data.data.radioList
-	        	})
-	        }
+	        	});
 
+	       
+
+	        }
+	    
 	}
+
+	
 </script>
 <style type="text/css" src="../../static/iconfont/iconfont.css" scoped></style>
 <style type="text/css" scoped lang="scss">
@@ -143,6 +191,9 @@
 			    		height: 100%;
 			    		position: relative;
 			    		background: #fff;
+			    		div{
+			    			height:300px;
+			    		}
 			    		img{
 			    			position: absolute;
     						top: 0;
@@ -158,8 +209,8 @@
 						position: relative;
 						font-size: 30px;
 						color:#fff;
-						top:150px;
-						left:150px;
+						bottom: 55%;
+						left:80%;
 						font-weight: 100;
 
 			    		}

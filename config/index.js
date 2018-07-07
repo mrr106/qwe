@@ -33,7 +33,36 @@ module.exports = {
         target:'https://c.y.qq.com',
         host:'c.y.qq.com',
         changeOrigin:true
-        }
+        },
+                '/m': {
+          target: 'https://c.y.qq.com',
+          host: 'c.y.qq.com',
+          changeOrigin:true,
+         
+      },
+      // https://c.y.qq.com/base/fcgi-bin/fcg_global_comment_h5.fcg?
+      // g_tk=5381&uin=0&format=json&inCharset=utf-8&outCharset=utf-8&notice=0&platform=h5&needNewCode=1&cid=205360772&reqtype=1&cmd=8&needmusiccrit=0&pagesize=3
+      // &lasthotcommentid=0&qq=0&msg_comment_id=&pagenum=0&biztype=1&topid=214039228&ct=999&_=1530854365958
+      '/base': {
+          target: 'https://c.y.qq.com',
+          host: 'c.y.qq.com',
+          changeOrigin:true,
+         
+      },
+      '/splcloud': {
+                        target: 'https://c.y.qq.com',
+                        host: 'c.y.qq.com',
+                        changeOrigin:true,
+                        // pathRewrite: {
+                        //     '^/v4/api': '/v4/api'
+                        //   }
+                    },
+      '/soso':{
+            target:'https://c.y.qq.com',
+            host: 'c.y.qq.com',
+            changeOrigin:true
+      },
+
     },
 
     // Various Dev Server settings

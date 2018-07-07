@@ -10,6 +10,8 @@ import login from '@/components/login'
 import register from '@/components/register'
 import Hotsong from "../components/hotsong"
 import Album from "../components/album"
+import Zhaomu from "../components/zhaomu"
+import Xuezhiqian from "../components/xuezhiqian"
 
 Vue.use(Router)
 
@@ -17,8 +19,8 @@ export default new Router({
     mode:"history",
   routes: [
     {
-    	path:"/",
-    	component:Recom
+        path:"/",
+        component:Recom
     },
     {
         path:"/recom",
@@ -57,9 +59,16 @@ export default new Router({
       component:Hotsong
     },
     {
-      path:'/album',
+      path:'/album/:id',
       component:Album
     },
-
+    {
+      path:'/zhaomu',
+      component:Zhaomu
+    },
+    {
+      path:'/xuezhiqian',
+      component:Xuezhiqian
+    },
   ]
 })
